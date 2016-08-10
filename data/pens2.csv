@@ -1,0 +1,1 @@
+# List of pens and pencils in my office on August 9th 2016;;# first column is sequential ID;;# second column is pen length in mm;;# third column is the perceived color the pen writes in;;# skip 5 lines or all starting with # for import in R;;ID;length_of_pen;color_of_pen1;81;black2;149;blue3;85;black4;82;black5;145;blue6;85;black7;85;black

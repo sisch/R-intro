@@ -1,0 +1,241 @@
+presentation
+========================================================
+author: Katinka Fischer & Simon Schliesky
+date: 2016-09-20
+
+
+Topics
+========================================================
+
+1. **What is R?** - How does it work? How does it store these numbers?
+2. **From Excel to R** - What are the pitfalls?
+3. **Fitness of tables** - How to prepare R-compatible tables?
+4. **Pure beauty** - easy start with R plots.
+5. **Packages** - Gain benefit from other peoples' efforts.
+6. **Library** - Collection of helpful sources to seriously start learning R.
+
+
+Disclaimer
+========================================================
+
+We do **not** want you to become R experts from a 2h lecture.
+
+We **do** want to ease collaborations by giving you a basic understanding of what is happening *behind the scenes*.
+
+We will focus on **what** R can do rather than why it can do that.
+
+
+What is R? (1)
+========================================================
+R is a programming language, thus you can compute things:
+```{r}
+  1+2+3+4
+  ((1+1*5)^2+6)/7
+  sum(1:100)
+```
+
+
+What is R? (2)
+========================================================
+You can store values into variables and use them for calculations:
+```{r}
+  number_of_people_in_this_room <- 17
+  
+  # You can write comments to explain your code
+  # (they are ignored, but help understanding)
+  
+  # Check if number is even (divisible by two)
+  # 0=Yes 1=No
+  number_of_people_in_this_room %% 2
+```
+
+
+What is R? (3)
+========================================================
+More than one value can go into a single variable as well:
+```{r}
+  speaker_names <- c("Katinka", "Simon")
+  # They are stored in a numbered list
+  # Access single items with square brackets
+  speaker_names[2]
+  # R calls these lists of items: vector
+  speaker_names
+```
+
+
+What is R? (4)
+========================================================
+Ranges of numbers are designed for easy use:
+```{r}
+  numbers_from_1_to_100 <- 1:100
+  numbers_from_1_to_100
+  #remember the example from the first slide?
+  sum(numbers_from_1_to_100)
+```
+
+
+What is R? (5)
+========================================================
+Data frames, the most important data structure:
+```{r}
+  # a data frame is a table with labeled rows
+  # and columns
+  speakers <- data.frame(
+    row.names=speaker_names,
+    age=c(NA, NA),
+    height=c(NA, NA)
+    )
+  #print data frame
+  speakers
+```
+
+
+What is R? (6)
+========================================================
+Data frames, the most important data structure:
+```{r}
+  # access a column by name
+  speakers$height
+  # or by index [row,col] where empty means all
+  # so give me column 1 of all rows
+  speakers[,1]
+```
+
+
+What is R? (7)
+========================================================
+How to select rows by name?
+```{r}
+  # if row name equals
+  row_id <- row.names(speakers) == "Simon"
+  # returns a vector of True and False values
+  row_id
+  
+  # This can be used as index list as well
+  # with row index row_id return all columns
+  speakers[row_id,]
+```
+
+
+From Excel to R? (1)
+========================================================
+Excel tables and data frames are similar, however:
+- Data frames must not have different column lengths
+- Row and column names are not part of the cells
+- Spaces in names are not allowed ($-syntax would not work)
+- Column names must be unique
+- Non-rectangular tables are problematic
+- **One row represents one dataset**
+
+How does this apply to reality?
+
+
+From Excel to R? (2)
+========================================================
+![A table of pen sizes and colors in Excel](presentation-figure/excel1.png)
+
+***
+
+Example Excel sheet with:
+- unique headers
+- no spaces
+- rectangular
+
+
+From Excel to R? (3)
+========================================================
+In R this looks like:
+```{r}
+  pen_experiment <- read.csv("data/pens.csv")
+  pen_experiment
+```
+
+
+From Excel to R? (4)
+========================================================
+That did not look correct:
+```{r}
+  pen_experiment <- read.csv("data/pens.csv",
+                             header=TRUE,
+                             row.names=1,
+                             sep=";")
+  pen_experiment
+```
+
+
+From Excel to R? (5)
+========================================================
+Useful next steps:
+```{r}
+  summary(pen_experiment)
+```
+
+
+From Excel to R? (6)
+========================================================
+Putting comments at the top of your Excel file makes life easier:
+![A table of pen sizes and colors in Excel](presentation-figure/excel2.png)
+***
+```{r, eval=FALSE}
+  read.csv("data/pens2.csv",
+        header=TRUE,
+        row.names = 1,
+        sep=";",
+        comment.char = "#")
+```
+
+
+Fitness of Tables? (1)
+========================================================
+Unfortunately reality often looks different
+![A table of photometric measurements as seen in the wild](presentation-figure/excel3.png)
+
+
+Fitness of Tables? (2)
+========================================================
+```{r}
+  read.csv("data/nightmare.csv",header=TRUE,
+                sep=";",dec=",",comment.char = "#")
+```
+
+
+Fitness of Tables? (3)
+========================================================
+Problems with this layout
+![A table of photometric measurements as seen in the wild](presentation-figure/excel3.png)
+---
+- These are four tables not one
+- Tables are placed almost randomly 
+- row and column identities are inconsistent
+- One row = One dataset violated
+
+
+Fitness of Tables? (4)
+========================================================
+New Layout
+![A table of photometric measurements redesigned for R-compatibility](presentation-figure/excel4.png)
+***
+
+- Now we have one table
+- Distinction between four tables is implemented through extra category (column)
+- One row = One dataset 
+
+
+Fitness of Tables? (5)
+========================================================
+This looks better in R:
+```{r} 
+  better<-read.csv("data/bettersleep.csv",header=TRUE,
+                sep=";", dec=",",comment.char = "#")
+  better 
+```
+
+
+Fitness of Tables? (6)
+========================================================
+Now we can start processing the data:
+```{r}
+  table(better$treatment)
+  summary(better$nadh_conc)
+```
+
