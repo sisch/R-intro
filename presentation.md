@@ -10,9 +10,8 @@ Topics
 1. **What is R?** - How does it work? How does it store these numbers?
 2. **From Excel to R** - What are the pitfalls?
 3. **Fitness of tables** - How to prepare R-compatible tables?
-4. **Pure beauty** - easy start with R plots.
-5. **Packages** - Gain benefit from other peoples' efforts.
-6. **Library** - Collection of helpful sources to seriously start learning R.
+4. **Best practices** - How to keep frustration levels minimal?
+5. **Library** - Collection of helpful sources to seriously start learning R.
 
 
 Disclaimer
@@ -46,11 +45,11 @@ R is a programming language, thus you can compute things:
 ```
 
 ```r
-  sum(1:100)
+  sum(1:10)
 ```
 
 ```
-[1] 5050
+[1] 55
 ```
 
 
@@ -104,26 +103,21 @@ What is R? (4)
 Ranges of numbers are designed for easy use:
 
 ```r
-  numbers_from_1_to_100 <- 1:100
-  numbers_from_1_to_100
+numbers_from_1_to_10 <- 1:10
+numbers_from_1_to_10
 ```
 
 ```
-  [1]   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17
- [18]  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34
- [35]  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51
- [52]  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68
- [69]  69  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84  85
- [86]  86  87  88  89  90  91  92  93  94  95  96  97  98  99 100
+ [1]  1  2  3  4  5  6  7  8  9 10
 ```
 
 ```r
-  #remember the example from the first slide?
-  sum(numbers_from_1_to_100)
+#remember the example from the first slide?
+sum(numbers_from_1_to_10)
 ```
 
 ```
-[1] 5050
+[1] 55
 ```
 
 
@@ -136,17 +130,17 @@ Data frames, the most important data structure:
   # and columns
   speakers <- data.frame(
     row.names=speaker_names,
-    age=c(NA, NA),
-    height=c(NA, NA)
+    species=c("human", "human"),
+    hair_color=c("blonde","brown")
     )
   #print data frame
   speakers
 ```
 
 ```
-        age height
-Katinka  NA     NA
-Simon    NA     NA
+        species hair_color
+Katinka   human     blonde
+Simon     human      brown
 ```
 
 
@@ -156,11 +150,12 @@ Data frames, the most important data structure:
 
 ```r
   # access a column by name
-  speakers$height
+  speakers$hair_color
 ```
 
 ```
-[1] NA NA
+[1] blonde brown 
+Levels: blonde brown
 ```
 
 ```r
@@ -170,7 +165,8 @@ Data frames, the most important data structure:
 ```
 
 ```
-[1] NA NA
+[1] human human
+Levels: human
 ```
 
 
@@ -180,9 +176,9 @@ How to select rows by name?
 
 ```r
   # if row name equals
-  row_id <- row.names(speakers) == "Simon"
+  simon_row <- row.names(speakers) == "Simon"
   # returns a vector of True and False values
-  row_id
+  simon_row
 ```
 
 ```
@@ -191,13 +187,13 @@ How to select rows by name?
 
 ```r
   # This can be used as index list as well
-  # with row index row_id return all columns
-  speakers[row_id,]
+  # with row index simon_row return all columns
+  speakers[simon_row,]
 ```
 
 ```
-      age height
-Simon  NA     NA
+      species hair_color
+Simon   human      brown
 ```
 
 
@@ -384,7 +380,7 @@ Problems with this layout
 
 Fitness of Tables? (4)
 ========================================================
-New Layout
+New Layout:
 ![A table of photometric measurements redesigned for R-compatibility](presentation-figure/excel4.png)
 ***
 
@@ -447,3 +443,74 @@ A B C D
   1.980   1.997   2.010   2.005   2.016   2.023 
 ```
 
+
+Best Practices. (1)
+========================================================
+The mission:
+  - mark important genes
+
+Best Practices (2)
+========================================================
+DONT
+
+![](presentation-figure/best_practice_dont.png)
+
+---
+
+DO 
+
+![](presentation-figure/best_practice_do.png)
+
+---
+
+filtering only by color is undetectable in csv
+
+Best Practices (3)
+========================================================
+DONT
+
+![](presentation-figure/best_practice2_dont.png)
+
+---
+
+DO 
+
+![](presentation-figure/best_practice2_do.png)
+
+Best Practices (4)
+========================================================
+BEST
+
+![](presentation-figure/best_practice2_best.png)
+
+Best Practices (5)
+========================================================
+It is not always about R:
+* opportunity to improve Excel skills as well
+  - and save time
+* compatibility to many tools instead of just one
+* closer to the file formats produced by lab hardware
+
+--
+Want to learn more?
+* Checkout [Seven deadly spreadsheet sins](http://production-scheduling.com/seven-deadly-spreadsheet-sins/)
+
+Library (1)
+========================================================
+ Resources for learning:
+* [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/) (final draft)
+  - covers everything that has been explained
+  - Additionally explains how to write full reports within Rstudio
+* [R for Biologists](https://cran.r-project.org/doc/contrib/Martinez-RforBiologistv1.1.pdf)
+
+Resources for packages:
+* [CRAN package index](https://cran.r-project.org/) or [google](https://google.com)
+* Specifically for biology: [Bioconductor](https://www.bioconductor.org/)
+
+Library (2)
+========================================================
+Find this presentation on GitHub:
+
+**https://github.com/sisch/R-intro**
+
+![](presentation-figure/github_qr.jpg)

@@ -10,9 +10,8 @@ Topics
 1. **What is R?** - How does it work? How does it store these numbers?
 2. **From Excel to R** - What are the pitfalls?
 3. **Fitness of tables** - How to prepare R-compatible tables?
-4. **Pure beauty** - easy start with R plots.
-5. **Packages** - Gain benefit from other peoples' efforts.
-6. **Library** - Collection of helpful sources to seriously start learning R.
+4. **Best practices** - How to keep frustration levels minimal?
+5. **Library** - Collection of helpful sources to seriously start learning R.
 
 
 Disclaimer
@@ -31,7 +30,7 @@ R is a programming language, thus you can compute things:
 ```{r}
   1+2+3+4
   ((1+1*5)^2+6)/7
-  sum(1:100)
+  sum(1:10)
 ```
 
 
@@ -67,10 +66,10 @@ What is R? (4)
 ========================================================
 Ranges of numbers are designed for easy use:
 ```{r}
-  numbers_from_1_to_100 <- 1:100
-  numbers_from_1_to_100
-  #remember the example from the first slide?
-  sum(numbers_from_1_to_100)
+numbers_from_1_to_10 <- 1:10
+numbers_from_1_to_10
+#remember the example from the first slide?
+sum(numbers_from_1_to_10)
 ```
 
 
@@ -82,8 +81,8 @@ Data frames, the most important data structure:
   # and columns
   speakers <- data.frame(
     row.names=speaker_names,
-    age=c(NA, NA),
-    height=c(NA, NA)
+    species=c("human", "human"),
+    hair_color=c("blonde","brown")
     )
   #print data frame
   speakers
@@ -95,7 +94,7 @@ What is R? (6)
 Data frames, the most important data structure:
 ```{r}
   # access a column by name
-  speakers$height
+  speakers$hair_color
   # or by index [row,col] where empty means all
   # so give me column 1 of all rows
   speakers[,1]
@@ -107,13 +106,13 @@ What is R? (7)
 How to select rows by name?
 ```{r}
   # if row name equals
-  row_id <- row.names(speakers) == "Simon"
+  simon_row <- row.names(speakers) == "Simon"
   # returns a vector of True and False values
-  row_id
+  simon_row
   
   # This can be used as index list as well
-  # with row index row_id return all columns
-  speakers[row_id,]
+  # with row index simon_row return all columns
+  speakers[simon_row,]
 ```
 
 
@@ -212,7 +211,7 @@ Problems with this layout
 
 Fitness of Tables? (4)
 ========================================================
-New Layout
+New Layout:
 ![A table of photometric measurements redesigned for R-compatibility](presentation-figure/excel4.png)
 ***
 
@@ -239,3 +238,74 @@ Now we can start processing the data:
   summary(better$nadh_conc)
 ```
 
+
+Best Practices. (1)
+========================================================
+The mission:
+  - mark important genes
+
+Best Practices (2)
+========================================================
+DONT
+
+![](presentation-figure/best_practice_dont.png)
+
+---
+
+DO 
+
+![](presentation-figure/best_practice_do.png)
+
+---
+
+filtering only by color is undetectable in csv
+
+Best Practices (3)
+========================================================
+DONT
+
+![](presentation-figure/best_practice2_dont.png)
+
+---
+
+DO 
+
+![](presentation-figure/best_practice2_do.png)
+
+Best Practices (4)
+========================================================
+BEST
+
+![](presentation-figure/best_practice2_best.png)
+
+Best Practices (5)
+========================================================
+It is not always about R:
+* opportunity to improve Excel skills as well
+  - and save time
+* compatibility to many tools instead of just one
+* closer to the file formats produced by lab hardware
+
+--
+Want to learn more?
+* Checkout [Seven deadly spreadsheet sins](http://production-scheduling.com/seven-deadly-spreadsheet-sins/)
+
+Library (1)
+========================================================
+ Resources for learning:
+* [Getting used to R, RStudio, and R Markdown](https://ismayc.github.io/rbasics-book/) (final draft)
+  - covers everything that has been explained
+  - Additionally explains how to write full reports within Rstudio
+* [R for Biologists](https://cran.r-project.org/doc/contrib/Martinez-RforBiologistv1.1.pdf)
+
+Resources for packages:
+* [CRAN package index](https://cran.r-project.org/) or [google](https://google.com)
+* Specifically for biology: [Bioconductor](https://www.bioconductor.org/)
+
+Library (2)
+========================================================
+Find this presentation on GitHub:
+
+**https://github.com/sisch/R-intro**
+
+![](presentation-figure/github_qr.jpg)

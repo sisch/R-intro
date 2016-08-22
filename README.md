@@ -1,7 +1,7 @@
 # R-intro
-This R-presentation is designed to give experimentalists an overview of the general workflow of R as used by statisticians.
-Through this we try to bring experimentalists (i.e. biologists in our case)  and statisticians closer together.
-Hence our goal is to facilitate collaborations between the two groups.
+This R-presentation is designed to give experimentalists an overview of the general workflow of R.
+Through this we try to bring experimentalists (i.e. biologists in our case) and statisticians closer together.
+Our goal is to facilitate collaborations between the two groups by giving advice on data exchange formats and practices.
 
 # Authors
 - Katinka Fischer 
