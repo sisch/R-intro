@@ -1,7 +1,13 @@
-presentation
+Intro to R for Biologists
 ========================================================
 author: Katinka Fischer & Simon Schliesky
 date: 2016-09-20
+
+
+Sneak Preview
+========================================================
+
+![A table of photometric measurements as seen in the wild](presentation-figure/excel3.png)
 
 
 Topics
@@ -12,7 +18,7 @@ Topics
 3. **Fitness of tables** - How to prepare R-compatible tables?
 4. **Best practices** - How to keep frustration levels minimal?
 5. **Library** - Collection of helpful sources to seriously start learning R.
-
+6. **Q&A** - Open questions 
 
 Disclaimer
 ========================================================
@@ -59,10 +65,10 @@ You can store values into variables and use them for calculations:
 
 ```r
   number_of_people_in_this_room <- 17
-  
+
   # You can write comments to explain your code
   # (they are ignored, but help understanding)
-  
+
   # Check if number is even (divisible by two)
   # 0=Yes 1=No
   number_of_people_in_this_room %% 2
@@ -196,6 +202,68 @@ How to select rows by name?
 Simon   human      brown
 ```
 
+What is R? (8)
+========================================================
+One word about data types:
+
+```r
+  # speaker names are text (characters)
+  class(row.names(speakers))
+```
+
+```
+[1] "character"
+```
+
+```r
+  # characters are created with double quotes
+  class("This is of type character")
+```
+
+```
+[1] "character"
+```
+
+What is R? (9)
+========================================================
+Categories are better represented by factor:
+
+```r
+  # speaker names are text (characters)
+  colors <- c("blond", "blond", "brown", "blond", "red")
+  as.factor(colors)
+```
+
+```
+[1] blond blond brown blond red  
+Levels: blond brown red
+```
+
+What is R? (10)
+========================================================
+Categories are better represented by factor:
+
+```r
+  summary(colors)
+```
+
+```
+   Length     Class      Mode 
+        5 character character 
+```
+
+```r
+  summary(as.factor(colors))
+```
+
+```
+blond brown   red 
+    3     1     1 
+```
+
+What is R? (11)
+========================================================
+Any questions?
 
 From Excel to R? (1)
 ========================================================
@@ -301,6 +369,11 @@ Putting comments at the top of your Excel file makes life easier:
 ```
 
 
+From Excel to R? (7)
+========================================================
+Any questions?
+
+
 Fitness of Tables? (1)
 ========================================================
 Unfortunately reality often looks different
@@ -373,7 +446,7 @@ Problems with this layout
 ![A table of photometric measurements as seen in the wild](presentation-figure/excel3.png)
 ---
 - These are four tables not one
-- Tables are placed almost randomly 
+- Tables are placed almost randomly
 - row and column identities are inconsistent
 - One row = One dataset violated
 
@@ -386,7 +459,7 @@ New Layout:
 
 - Now we have one table
 - Distinction between four tables is implemented through extra category (column)
-- One row = One dataset 
+- One row = One dataset
 
 
 Fitness of Tables? (5)
@@ -396,7 +469,7 @@ This looks better in R:
 ```r
   better<-read.csv("data/bettersleep.csv",header=TRUE,
                 sep=";", dec=",",comment.char = "#")
-  better 
+  better
 ```
 
 ```
@@ -444,6 +517,11 @@ A B C D
 ```
 
 
+Fitness of Tables? (7)
+========================================================
+Any questions?
+
+
 Best Practices. (1)
 ========================================================
 The mission:
@@ -457,7 +535,7 @@ DONT
 
 ---
 
-DO 
+DO
 
 ![](presentation-figure/best_practice_do.png)
 
@@ -473,7 +551,7 @@ DONT
 
 ---
 
-DO 
+DO
 
 ![](presentation-figure/best_practice2_do.png)
 
@@ -495,6 +573,12 @@ It is not always about R:
 Want to learn more?
 * Checkout [Seven deadly spreadsheet sins](http://production-scheduling.com/seven-deadly-spreadsheet-sins/)
 
+
+Best Practices? (6)
+========================================================
+Any questions?
+
+
 Library (1)
 ========================================================
  Resources for learning:
@@ -514,3 +598,8 @@ Find this presentation on GitHub:
 **https://github.com/sisch/R-intro**
 
 ![](presentation-figure/github_qr.jpg)
+
+
+Q&A
+========================================================
+Time for additional questions and live demos.
